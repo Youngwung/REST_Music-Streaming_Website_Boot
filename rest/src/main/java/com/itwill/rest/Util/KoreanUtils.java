@@ -5,7 +5,7 @@ public class KoreanUtils {
 	private static final char[] CHOSUNG = {
 			'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
 	};
-
+	
 	// 문자가 한글인 지 검사하는 메서드
 	public static boolean isHangul(char c) {
 		return c >= '\uAC00' && c <= '\uD7A3';

@@ -6,11 +6,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.rest.domain.Album;
+import com.itwill.rest.domain.AlbumFirstCon;
 import com.itwill.rest.domain.Artist;
 import com.itwill.rest.domain.ArtistRole;
 import com.itwill.rest.domain.ArtistRoleId;
@@ -24,6 +26,7 @@ import com.itwill.rest.domain.SongGenre;
 import com.itwill.rest.domain.SongGenreId;
 import com.itwill.rest.domain.TitleSong;
 import com.itwill.rest.domain.TitleSongId;
+import com.itwill.rest.service.FirstConService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -61,10 +64,21 @@ public class AlbumRepositoryTest {
 	@Autowired
 	private TitleSongRepository titleSongRepo;
 
+	@Autowired
+	private FirstConService firstConServ;
+
 	// @Test
 	public void diTest() {
 		log.info("diTest(albumRepo = {})", albumRepo);
 		assertThat(albumRepo).isNotNull();
+	}
+
+	@Test
+	public void synchFirstCon() {
+		// 기존 앨범 테이블과 신규 초성 테이블을 동기화하는 초기세팅 테스트 메서드
+		// 기존 앨범 테이블의 albumName 컬럼을 초성화 한 후에 초성 테이블에 save하는 서비스 계층 메서드 호출
+		List<AlbumFirstCon> synchAlbumFirstCon = firstConServ.synchAlbumFirstCon();
+		synchAlbumFirstCon.forEach(s -> System.out.println(s));
 	}
 
 	// @Test
